@@ -5,6 +5,8 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
+cd /root
+
 # Docker 설치
 yum update -y
 yum install -y docker
