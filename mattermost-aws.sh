@@ -1,7 +1,17 @@
 #!/bin/bash
 
 if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
+  then echo "[ABORT] Please run as root"
+  exit
+fi
+
+if [[ -z "${DOMAIN}" ]]
+  then echo "[ABORT] DOMAIN environment variable is undefined. e.g) export DOMAIN=chat.aws.com"
+  exit
+fi
+
+if [[ -z "${POSTGRES_ENDPOINT}" ]]
+  then echo "[ABORT] POSTGRES_ENDPOINT environment variable is undefined. e.g) export POSTGRES_ENDPOINT=mattermost-db.c7ogkukoc4vp.ap-northeast-2.rds.amazonaws.com"
   exit
 fi
 
