@@ -1,7 +1,12 @@
 #!/bin/bash
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 # Docker 설치
-sudo yum update -y
+yum update -y
 yum install -y docker
 
 # Start the Docker service.
@@ -9,9 +14,6 @@ service docker start
 
 # Docker Compose 설치
 curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-# Add the 'ec2-user' to the Docker group so you can execute Docker commands without using 'sudo'
-usermod -a -G docker ec2-user
 
 # Set the permissions.
 chmod +x /usr/local/bin/docker-compose
@@ -108,7 +110,6 @@ MM_SQLSETTINGS_DATASOURCE=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POS
 
 ## Example settings (any additional setting added here also needs to be introduced in the docker-compose.yml)
 MM_SERVICESETTINGS_SITEURL=https://${DOMAIN}
-
 EOF
 
 # 'docker-compose.yml' 파일 수정
@@ -152,7 +153,6 @@ services:
       - 80:8065
       - ${CALLS_PORT}:${CALLS_PORT}/udp
       - ${CALLS_PORT}:${CALLS_PORT}/tcp
-
 EOF
 
 # Create the required directories and set their permissions.
