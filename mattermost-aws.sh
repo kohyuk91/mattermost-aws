@@ -6,12 +6,12 @@ if [ "$EUID" -ne 0 ]
 fi
 
 if [[ -z "${DOMAIN}" ]]; then
-  read -sp "DOMAIN : " read_domain
+  read -p "DOMAIN : " read_domain
   export DOMAIN=$read_domain
 fi
 
 if [[ -z "${POSTGRES_ENDPOINT}" ]]; then
-  read -sp "POSTGRES_ENDPOINT : " read_postgres_endpoint
+  read -p "POSTGRES_ENDPOINT : " read_postgres_endpoint
   export POSTGRES_ENDPOINT=$read_postgres_endpoint
 fi
 
