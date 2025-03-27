@@ -36,7 +36,13 @@ git clone https://github.com/mattermost/docker
 cd docker
 
 # '.env' 파일 생성
-cat << "EOF" > .env
+cat << EOF > .env
+DOMAIN=${DOMAIN}
+POSTGRES_ENDPOINT=${POSTGRES_ENDPOINT}
+
+EOF
+
+cat << "EOF" >> .env
 # Container settings
 ## Timezone inside the containers. The value needs to be in the form 'Europe/Berlin'.
 ## A list of these tz database names can be looked up at Wikipedia
